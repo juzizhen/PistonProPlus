@@ -1,4 +1,4 @@
-Mc PistonReinforcement
+PistonProPlus
 ============
 
 This is Minecraft 1.20.1 Fabric Mod
