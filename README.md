@@ -220,6 +220,7 @@ This project is licensed under the GPLv3 License - see the [LICENSE](LICENSE) fi
 
 - [GitHub Repository](https://github.com/juzizhen/PistonProPlus)
 - [Curseforge](https://www.curseforge.com/minecraft/mc-mods/pistonproplus)
+- [Modrinth](https://modrinth.com/mod/pistonproplus)
 
 ---
 
