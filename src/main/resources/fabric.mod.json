@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "pistonproplus",
+	"version": "${version}",
+	"name": "PistonProPlus",
+	"description": "Make Piston Great Again !",
+	"authors": [
+		"juzizhen"
+	],
+	"contact": {
+		"homepage": "https://github.com/juzizhen/PistonProPlus",
+		"sources": "https://github.com/juzizhen/PistonProPlus"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/pistonproplus/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.juzizhen.pistonproplus.PistonProPlus"
+		],
+		"fabric-datagen": [
+			"com.juzizhen.pistonproplus.PistonProPlusDataGenerator"
+		]
+	},
+	"mixins": [
+		"pistonproplus.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
