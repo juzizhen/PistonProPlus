@@ -1,10 +1,10 @@
 {
-  "message.pistonproplus.prefix": "[活塞专业版+]",
+  "message.pistonproplus.prefix": "[活塞ProPlus]",
   "message.pistonproplus.success": "[✔]",
   "message.pistonproplus.error": "[✘]",
   "message.pistonproplus.info": "[ℹ]",
   
-  "command.pistonproplus.help.title": "活塞专业版+ 帮助菜单",
+  "command.pistonproplus.help.title": "活塞ProPlus 帮助菜单",
   "command.pistonproplus.help.line": "%s - %s",
   "command.pistonproplus.help.version": "当前版本: %s",
   
