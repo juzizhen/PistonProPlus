@@ -1,14 +1,15 @@
 {
-	"required": true,
-	"package": "com.juzizhen.pistonproplus.mixin",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-      "PistonBlockMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
+  "required": true,
+  "package": "com.juzizhen.pistonproplus.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PistonBlockIsMovableMixin",
+    "PistonBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
 	}
 }

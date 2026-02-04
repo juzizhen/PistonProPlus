@@ -37,6 +37,16 @@ public class I18n {
     public static final String COMMAND_RELOAD_LIMIT_CHANGED = "command." + MOD_ID + ".reload.limit_changed";
     public static final String COMMAND_RELOAD_LIMIT_UNCHANGED = "command." + MOD_ID + ".reload.limit_unchanged";
 
+    // 新增的命令方块控制
+    public static final String COMMAND_BLOCK_ENABLED = "command." + MOD_ID + ".block.commandblock.enabled";
+    public static final String COMMAND_BLOCK_DISABLED = "command." + MOD_ID + ".block.commandblock.disabled";
+    public static final String COMMAND_BLOCK_WARNING = "command." + MOD_ID + ".block.commandblock.warning";
+
+    // 新增的所有方块控制
+    public static final String ALL_BLOCKS_ENABLED = "command." + MOD_ID + ".block.all.enabled";
+    public static final String ALL_BLOCKS_DISABLED = "command." + MOD_ID + ".block.all.disabled";
+    public static final String ALL_BLOCKS_WARNING = "command." + MOD_ID + ".block.all.warning";
+
     // 杂项
     public static final String VANILLA_DEFAULT = "misc." + MOD_ID + ".vanilla_default";
     public static final String BLOCKS = "misc." + MOD_ID + ".blocks";
@@ -49,6 +59,8 @@ public class I18n {
     public static final String COMMANDS_SET_INFINITE_DESCRIPTION = "commands.set_infinite.description";
     public static final String COMMANDS_RELOAD_DESCRIPTION = "commands.reload.description";
     public static final String COMMANDS_REQUIRES_OP = "commands.requires_op";
+    public static final String COMMANDS_SET_COMMANDBLOCK_DESCRIPTION = "commands.set_commandblock.description";
+    public static final String COMMANDS_SET_ALLBLOCKS_DESCRIPTION = "commands.set_allblocks.description";
 
     // 模式名称
     public static final String MODE_ENHANCED = "misc.enhanced_mode";
@@ -63,4 +75,5 @@ public class I18n {
     public static final String FEATURE_HOT_RELOAD = "feature.hot_reload";
     public static final String FEATURE_COMMANDS = "feature.commands";
     public static final String FEATURE_COLORED_MESSAGES = "feature.colored_messages";
+    public static final String FEATURE_BLOCK_CONTROL = "feature.block_control";
 }

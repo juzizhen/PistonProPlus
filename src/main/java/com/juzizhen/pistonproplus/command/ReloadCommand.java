@@ -24,6 +24,8 @@ public class ReloadCommand {
         // 保存旧值用于比较
         int oldLimit = ModConfig.getMaxPushLimit();
         boolean oldInfinite = ModConfig.isAllowInfinitePush();
+        boolean oldCommandBlock = ModConfig.isAllowPushCommandBlock();
+        boolean oldAllBlocks = ModConfig.isAllowPushAllBlocks();
 
         // 重新加载配置
         ModConfig.reloadConfig();
@@ -31,11 +33,14 @@ public class ReloadCommand {
         // 获取新值
         int newLimit = ModConfig.getMaxPushLimit();
         boolean newInfinite = ModConfig.isAllowInfinitePush();
+        boolean newCommandBlock = ModConfig.isAllowPushCommandBlock();
+        boolean newAllBlocks = ModConfig.isAllowPushAllBlocks();
 
         // 构建反馈消息
         StringBuilder message = new StringBuilder();
         message.append(Text.translatable(I18n.COMMAND_RELOAD_SUCCESS).getString()).append("\n");
 
+        // 检查无限推动模式是否改变
         if (oldInfinite != newInfinite) {
             String oldStatus = oldInfinite ?
                     Text.translatable(I18n.OPTIONS_ON).getString() :
@@ -47,6 +52,31 @@ public class ReloadCommand {
             message.append(Text.translatable(I18n.COMMAND_RELOAD_INFINITE_CHANGED, oldStatus, newStatus).getString()).append("\n");
         }
 
+        // 检查命令方块推动是否改变
+        if (oldCommandBlock != newCommandBlock) {
+            String oldStatus = oldCommandBlock ?
+                    Text.translatable(I18n.OPTIONS_ON).getString() :
+                    Text.translatable(I18n.OPTIONS_OFF).getString();
+            String newStatus = newCommandBlock ?
+                    Text.translatable(I18n.OPTIONS_ON).getString() :
+                    Text.translatable(I18n.OPTIONS_OFF).getString();
+
+            message.append("Command Block: ").append(oldStatus).append(" → ").append(newStatus).append("\n");
+        }
+
+        // 检查所有方块推动是否改变
+        if (oldAllBlocks != newAllBlocks) {
+            String oldStatus = oldAllBlocks ?
+                    Text.translatable(I18n.OPTIONS_ON).getString() :
+                    Text.translatable(I18n.OPTIONS_OFF).getString();
+            String newStatus = newAllBlocks ?
+                    Text.translatable(I18n.OPTIONS_ON).getString() :
+                    Text.translatable(I18n.OPTIONS_OFF).getString();
+
+            message.append("All Blocks: ").append(oldStatus).append(" → ").append(newStatus).append("\n");
+        }
+
+        // 检查推动上限是否改变
         if (oldLimit != newLimit) {
             String oldDisplay = oldInfinite ?
                     "∞" : String.valueOf(oldLimit);

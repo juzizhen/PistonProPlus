@@ -3,48 +3,59 @@
   "message.pistonproplus.success": "[✔]",
   "message.pistonproplus.error": "[✘]",
   "message.pistonproplus.info": "[ℹ]",
-  
+
   "command.pistonproplus.help.title": "PistonProPlus Help Menu",
   "command.pistonproplus.help.line": "%s - %s",
   "command.pistonproplus.help.version": "Current Version: %s",
-  
+
   "command.pistonproplus.set.success": "Piston push limit set to: %s blocks",
   "command.pistonproplus.set.enhanced": "Piston push limit set to: %s blocks (%s)",
   "command.pistonproplus.set.restricted": "Piston push limit set to: %s blocks (%s)",
   "command.pistonproplus.set.same_as_vanilla": "Piston push limit set to: %s blocks (same as %s)",
-  
+
   "command.pistonproplus.get.current": "Current piston push limit: %s blocks %s",
   "command.pistonproplus.get.vanilla": "Current piston push limit: %s blocks (%s)",
   "command.pistonproplus.get.infinite": "Current piston push mode: Infinite push (Config value: %s)",
   "command.pistonproplus.get.config_value": "(Config value: %s)",
-  
+
   "command.pistonproplus.infinite.enabled": "Infinite push mode enabled!",
   "command.pistonproplus.infinite.disabled": "Infinite push mode disabled, back to config limit",
-  
+
   "command.pistonproplus.reload.success": "Config hot-reloaded!",
   "command.pistonproplus.reload.infinite_changed": "Infinite push: %s → %s",
   "command.pistonproplus.reload.limit_changed": "Push limit: %s → %s",
   "command.pistonproplus.reload.limit_unchanged": "Push limit: %s (unchanged)",
-  
+
+  "command.pistonproplus.block.commandblock.enabled": "Command block pushing enabled!",
+  "command.pistonproplus.block.commandblock.disabled": "Command block pushing disabled",
+  "command.pistonproplus.block.commandblock.warning": "⚠ Warning: Command blocks may lose NBT tags when pushed!",
+
+  "command.pistonproplus.block.all.enabled": "All blocks pushing enabled! (Except block 36 and command blocks)",
+  "command.pistonproplus.block.all.disabled": "All blocks pushing disabled",
+  "command.pistonproplus.block.all.warning": "⚠ Warning: Pushing all blocks may cause unexpected behavior!",
+
   "misc.pistonproplus.vanilla_default": "Vanilla Default",
   "misc.pistonproplus.blocks": "blocks",
   "misc.pistonproplus.infinity_symbol": "∞",
-  
+
   "commands.help.description": "Show this help menu",
   "commands.set_limit.description": "Set piston push limit",
   "commands.get_limit.description": "Get current piston push limit",
   "commands.set_infinite.description": "Enable/disable infinite push mode",
   "commands.reload.description": "Hot-reload configuration",
   "commands.requires_op": "[Requires OP]",
-  
+  "commands.set_commandblock.description": "Enable/disable command block pushing",
+  "commands.set_allblocks.description": "Enable/disable all blocks pushing (except block 36 and command blocks)",
+
   "misc.enhanced_mode": "Enhanced Mode",
   "misc.restricted_mode": "Restricted Mode",
-  
+
   "options.on": "ON",
   "options.off": "OFF",
-  
+
   "feature.modify_limit": "• Modify piston push limit, breaking vanilla 12-block restriction",
   "feature.hot_reload": "• Support hot reload, no server restart needed",
   "feature.commands": "• Complete command system for configuration",
-  "feature.colored_messages": "• Colored message notifications, better user experience"
+  "feature.colored_messages": "• Colored message notifications, better user experience",
+  "feature.block_control": "• Advanced block pushing control for command blocks and all blocks"
 }

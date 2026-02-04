@@ -22,7 +22,7 @@ public class PistonProPlusCommand {
                 .then(CommandManager.literal("push")
                         .then(CommandManager.literal("set")
                                 .requires(source -> source.hasPermissionLevel(4))
-                                .then(CommandManager.argument("limit", IntegerArgumentType.integer(1, 4096))
+                                .then(CommandManager.argument("limit", IntegerArgumentType.integer(1, 1024))
                                         .executes(context -> executeSetLimit(
                                                 context,
                                                 IntegerArgumentType.getInteger(context, "limit")
@@ -35,6 +35,25 @@ public class PistonProPlusCommand {
                                 .requires(source -> source.hasPermissionLevel(4))
                                 .then(CommandManager.argument("enabled", BoolArgumentType.bool())
                                         .executes(context -> executeSetInfinite(
+                                                context,
+                                                BoolArgumentType.getBool(context, "enabled")
+                                        )))))
+
+                // 新增的命令方块控制指令
+                .then(CommandManager.literal("block")
+                        .then(CommandManager.literal("commandblock")
+                                .requires(source -> source.hasPermissionLevel(4))
+                                .then(CommandManager.argument("enabled", BoolArgumentType.bool())
+                                        .executes(context -> executeSetCommandBlock(
+                                                context,
+                                                BoolArgumentType.getBool(context, "enabled")
+                                        ))))
+
+                        // 新增的所有方块控制指令
+                        .then(CommandManager.literal("all")
+                                .requires(source -> source.hasPermissionLevel(4))
+                                .then(CommandManager.argument("enabled", BoolArgumentType.bool())
+                                        .executes(context -> executeSetAllBlocks(
                                                 context,
                                                 BoolArgumentType.getBool(context, "enabled")
                                         )))))
@@ -56,7 +75,7 @@ public class PistonProPlusCommand {
 
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_LINE,
-                Text.literal("/pistonproplus push set <1-4096>").formatted(Formatting.YELLOW),
+                Text.literal("/pistonproplus push set <1-1024>").formatted(Formatting.YELLOW),
                 Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
                         .append(Text.translatable(I18n.COMMANDS_SET_LIMIT_DESCRIPTION).formatted(Formatting.GRAY))
         ));
@@ -76,6 +95,20 @@ public class PistonProPlusCommand {
 
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_LINE,
+                Text.literal("/pistonproplus block commandblock <true/false>").formatted(Formatting.YELLOW),
+                Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
+                        .append(Text.translatable(I18n.COMMANDS_SET_COMMANDBLOCK_DESCRIPTION).formatted(Formatting.GRAY))
+        ));
+
+        source.sendMessage(ChatFormat.createMessage(
+                I18n.COMMAND_HELP_LINE,
+                Text.literal("/pistonproplus block all <true/false>").formatted(Formatting.YELLOW),
+                Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
+                        .append(Text.translatable(I18n.COMMANDS_SET_ALLBLOCKS_DESCRIPTION).formatted(Formatting.GRAY))
+        ));
+
+        source.sendMessage(ChatFormat.createMessage(
+                I18n.COMMAND_HELP_LINE,
                 Text.literal("/pistonproplus reload").formatted(Formatting.YELLOW),
                 Text.translatable(I18n.COMMANDS_RELOAD_DESCRIPTION).formatted(Formatting.GREEN)
         ));
@@ -91,6 +124,7 @@ public class PistonProPlusCommand {
         source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_HOT_RELOAD)));
         source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_COMMANDS)));
         source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_COLORED_MESSAGES)));
+        source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_BLOCK_CONTROL)));
 
         return Command.SINGLE_SUCCESS;
     }
@@ -98,7 +132,6 @@ public class PistonProPlusCommand {
     private static int executeSetLimit(CommandContext<ServerCommandSource> context, int limit) {
         ModConfig.setMaxPushLimit(limit);
 
-        // 根据不同的情况显示不同的消息
         if (limit == 12) {
             context.getSource().sendMessage(
                     ChatFormat.createSuccessMessage(
@@ -173,6 +206,46 @@ public class PistonProPlusCommand {
         } else {
             context.getSource().sendMessage(
                     ChatFormat.createSuccessMessage(I18n.COMMAND_INFINITE_DISABLED)
+            );
+        }
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int executeSetCommandBlock(CommandContext<ServerCommandSource> context, boolean enabled) {
+        ModConfig.setAllowPushCommandBlock(enabled);
+
+        if (enabled) {
+            context.getSource().sendMessage(
+                    ChatFormat.createSuccessMessage(I18n.COMMAND_BLOCK_ENABLED)
+            );
+            // 显示警告消息
+            context.getSource().sendMessage(
+                    ChatFormat.createInfoMessage(I18n.COMMAND_BLOCK_WARNING)
+            );
+        } else {
+            context.getSource().sendMessage(
+                    ChatFormat.createSuccessMessage(I18n.COMMAND_BLOCK_DISABLED)
+            );
+        }
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int executeSetAllBlocks(CommandContext<ServerCommandSource> context, boolean enabled) {
+        ModConfig.setAllowPushAllBlocks(enabled);
+
+        if (enabled) {
+            context.getSource().sendMessage(
+                    ChatFormat.createSuccessMessage(I18n.ALL_BLOCKS_ENABLED)
+            );
+            // 显示警告消息
+            context.getSource().sendMessage(
+                    ChatFormat.createInfoMessage(I18n.ALL_BLOCKS_WARNING)
+            );
+        } else {
+            context.getSource().sendMessage(
+                    ChatFormat.createSuccessMessage(I18n.ALL_BLOCKS_DISABLED)
             );
         }
 

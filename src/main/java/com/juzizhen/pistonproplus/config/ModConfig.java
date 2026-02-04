@@ -19,15 +19,21 @@ public class ModConfig {
 
     private static ModConfig INSTANCE;
 
+    // 配置项 - 默认值为原版推动上限12
     public int maxPushLimit = 12;
-    protected boolean enableMessages = true;
-    protected boolean allowInfinitePush = false;
+    private boolean enableMessages = true;
+    private boolean allowInfinitePush = false;
+
+    // 新添加的配置项
+    private boolean allowPushCommandBlock = false;    // 是否允许推动命令方块
+    private boolean allowPushAllBlocks = false;       // 是否允许推动所有方块（除36号方块和命令方块外）
 
     public static void loadConfig() {
         if (CONFIG_FILE.exists()) {
             try (FileReader reader = new FileReader(CONFIG_FILE)) {
                 INSTANCE = GSON.fromJson(reader, ModConfig.class);
 
+                // 向后兼容性检查
                 if (INSTANCE.maxPushLimit < 1) {
                     INSTANCE.maxPushLimit = 12;
                     saveConfig();
@@ -56,14 +62,14 @@ public class ModConfig {
 
     public static int getMaxPushLimit() {
         if (INSTANCE.allowInfinitePush) {
-            return 4096;
+            return 1024;
         }
         return INSTANCE.maxPushLimit;
     }
 
     public static void setMaxPushLimit(int limit) {
         if (limit <= 0) {
-            limit = 1;
+            limit = 12;
         }
         INSTANCE.maxPushLimit = limit;
         saveConfig();
@@ -84,6 +90,25 @@ public class ModConfig {
 
     public static void setAllowInfinitePush(boolean allow) {
         INSTANCE.allowInfinitePush = allow;
+        saveConfig();
+    }
+
+    // 新增的getter和setter方法
+    public static boolean isAllowPushCommandBlock() {
+        return INSTANCE.allowPushCommandBlock;
+    }
+
+    public static void setAllowPushCommandBlock(boolean allow) {
+        INSTANCE.allowPushCommandBlock = allow;
+        saveConfig();
+    }
+
+    public static boolean isAllowPushAllBlocks() {
+        return INSTANCE.allowPushAllBlocks;
+    }
+
+    public static void setAllowPushAllBlocks(boolean allow) {
+        INSTANCE.allowPushAllBlocks = allow;
         saveConfig();
     }
 

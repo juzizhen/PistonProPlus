@@ -3,48 +3,59 @@
   "message.pistonproplus.success": "[✔]",
   "message.pistonproplus.error": "[✘]",
   "message.pistonproplus.info": "[ℹ]",
-  
+
   "command.pistonproplus.help.title": "活塞ProPlus 帮助菜单",
   "command.pistonproplus.help.line": "%s - %s",
   "command.pistonproplus.help.version": "当前版本: %s",
-  
+
   "command.pistonproplus.set.success": "活塞推动上限已设置为: %s 个方块",
   "command.pistonproplus.set.enhanced": "活塞推动上限已设置为: %s 个方块(%s)",
   "command.pistonproplus.set.restricted": "活塞推动上限已设置为: %s 个方块(%s)",
   "command.pistonproplus.set.same_as_vanilla": "活塞推动上限已设置为: %s 个方块(与%s相同)",
-  
+
   "command.pistonproplus.get.current": "当前活塞推动上限: %s 个方块 %s",
   "command.pistonproplus.get.vanilla": "当前活塞推动上限: %s 个方块(%s)",
   "command.pistonproplus.get.infinite": "当前活塞推动模式: 无限推动(配置值: %s)",
   "command.pistonproplus.get.config_value": "(配置值: %s)",
-  
+
   "command.pistonproplus.infinite.enabled": "已启用无限推动模式！",
   "command.pistonproplus.infinite.disabled": "已禁用无限推动模式，恢复为配置限制",
-  
+
   "command.pistonproplus.reload.success": "配置已热重载!",
   "command.pistonproplus.reload.infinite_changed": "无限推动: %s → %s",
   "command.pistonproplus.reload.limit_changed": "推动上限: %s → %s",
   "command.pistonproplus.reload.limit_unchanged": "推动上限: %s (未更改)",
-  
+
+  "command.pistonproplus.block.commandblock.enabled": "命令方块推动已启用！",
+  "command.pistonproplus.block.commandblock.disabled": "命令方块推动已禁用",
+  "command.pistonproplus.block.commandblock.warning": "⚠ 警告: 推动后的命令方块可能丢失NBT标签！",
+
+  "command.pistonproplus.block.all.enabled": "所有方块推动已启用！(除36号方块和命令方块外)",
+  "command.pistonproplus.block.all.disabled": "所有方块推动已禁用",
+  "command.pistonproplus.block.all.warning": "⚠ 警告: 推动所有方块可能导致意外行为！",
+
   "misc.pistonproplus.vanilla_default": "原版默认",
   "misc.pistonproplus.blocks": "个方块",
   "misc.pistonproplus.infinity_symbol": "∞",
-  
+
   "commands.help.description": "显示此帮助菜单",
   "commands.set_limit.description": "设置活塞推动上限",
   "commands.get_limit.description": "获取当前活塞推动上限",
   "commands.set_infinite.description": "启用/禁用无限推动模式",
   "commands.reload.description": "热重载配置",
   "commands.requires_op": "[需管理员权限]",
-  
+  "commands.set_commandblock.description": "启用/禁用命令方块推动",
+  "commands.set_allblocks.description": "启用/禁用所有方块推动(除36号方块和命令方块外)",
+
   "misc.enhanced_mode": "增强模式",
   "misc.restricted_mode": "限制模式",
-  
+
   "options.on": "开",
   "options.off": "关",
-  
+
   "feature.modify_limit": "• 修改活塞推动上限，突破原版12个方块的限制",
   "feature.hot_reload": "• 支持热重载，无需重启服务器",
   "feature.commands": "• 完整的命令系统用于配置",
-  "feature.colored_messages": "• 彩色消息提示，更好的用户体验"
+  "feature.colored_messages": "• 彩色消息提示，更好的用户体验",
+  "feature.block_control": "• 高级方块推动控制，支持命令方块和所有方块"
 }
