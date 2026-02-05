@@ -16,8 +16,8 @@ PistonProPlus is a powerful mod that enhances piston functionality in Minecraft,
 ### 🔧 Core Features
 
 1. **Customizable Push Limit**  
-   - Break the vanilla 12-block limit (up to 1024 blocks!)
-   - Set any value between 1 and 1024
+   - Break the vanilla 12-block limit (up to 4096 blocks!)
+   - Set any value between 1 and 4096
    - Default is 12 (same as vanilla)
 
 2. **Advanced Block Pushing Control**  
@@ -57,7 +57,7 @@ Displays the complete help menu with all available commands.
 
 ### Push Limit Commands
 ```
-/pistonproplus push set <1-1024>
+/pistonproplus push set <1-4096>
 ```
 Set the maximum number of blocks pistons can push.  
 **Requires OP permission (level 4)**
@@ -113,7 +113,7 @@ Located at: `config/pistonproplus.json`
 ```
 
 ### Configuration Options
-- **maxPushLimit**: Maximum blocks pistons can push (1-1024)
+- **maxPushLimit**: Maximum blocks pistons can push (1-4096)
 - **enableMessages**: Whether to show success/failure messages
 - **allowInfinitePush**: Enable infinite push mode
 - **allowPushCommandBlock**: Allow pistons to push command blocks

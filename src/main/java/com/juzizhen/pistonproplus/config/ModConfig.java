@@ -21,7 +21,6 @@ public class ModConfig {
 
     // 配置项 - 默认值为原版推动上限12
     public int maxPushLimit = 12;
-    private boolean enableMessages = true;
     private boolean allowInfinitePush = false;
 
     // 新添加的配置项
@@ -62,7 +61,7 @@ public class ModConfig {
 
     public static int getMaxPushLimit() {
         if (INSTANCE.allowInfinitePush) {
-            return 1024;
+            return 4096;
         }
         return INSTANCE.maxPushLimit;
     }
@@ -72,15 +71,6 @@ public class ModConfig {
             limit = 12;
         }
         INSTANCE.maxPushLimit = limit;
-        saveConfig();
-    }
-
-    public static boolean isEnableMessages() {
-        return INSTANCE.enableMessages;
-    }
-
-    public static void setEnableMessages(boolean enable) {
-        INSTANCE.enableMessages = enable;
         saveConfig();
     }
 

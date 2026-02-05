@@ -22,7 +22,7 @@ public class PistonProPlusCommand {
                 .then(CommandManager.literal("push")
                         .then(CommandManager.literal("set")
                                 .requires(source -> source.hasPermissionLevel(4))
-                                .then(CommandManager.argument("limit", IntegerArgumentType.integer(1, 1024))
+                                .then(CommandManager.argument("limit", IntegerArgumentType.integer(1, 4096))
                                         .executes(context -> executeSetLimit(
                                                 context,
                                                 IntegerArgumentType.getInteger(context, "limit")
@@ -75,7 +75,7 @@ public class PistonProPlusCommand {
 
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_LINE,
-                Text.literal("/pistonproplus push set <1-1024>").formatted(Formatting.YELLOW),
+                Text.literal("/pistonproplus push set <1-4096>").formatted(Formatting.YELLOW),
                 Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
                         .append(Text.translatable(I18n.COMMANDS_SET_LIMIT_DESCRIPTION).formatted(Formatting.GRAY))
         ));
