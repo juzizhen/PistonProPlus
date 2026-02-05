@@ -116,7 +116,7 @@ public class PistonProPlusCommand {
         // 显示版本信息
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_VERSION,
-                Text.literal("1.1.0").formatted(Formatting.AQUA)
+                Text.literal("1.1.1").formatted(Formatting.AQUA)
         ));
 
         // 显示功能特性
