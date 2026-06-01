@@ -80,7 +80,7 @@ Enable/disable infinite push mode.
 ```
 Enable/disable command block pushing.  
 **Requires OP permission (level 4)**  
-⚠️ **Warning**: Pushed command blocks may lose NBT tags!
+Pushing the command block will retain its NBT value.
 
 ```
 /pistonproplus block all <true/false>
@@ -119,77 +119,12 @@ Located at: `config/pistonproplus.json`
 - **allowPushCommandBlock**: Allow pistons to push command blocks
 - **allowPushAllBlocks**: Allow pistons to push all blocks (except 36 and command blocks unless enabled separately)
 
-## 🌍 Language Support
-
-### Built-in Languages
-- **English (en_us)** - Complete translation
-- **Chinese (zh_cn)** - 完整中文翻译
-
-### Adding New Languages
-1. Create a new JSON file in `assets/pistonproplus/lang/`
-2. Name it with the locale code (e.g., `fr_fr.json`, `es_es.json`)
-3. Translate all keys from `en_us.json`
-4. The mod will automatically detect and use the language based on client settings
-
-## 📦 Installation
-
-### For Players
-1. Install [Fabric Loader](https://fabricmc.net/use/) for Minecraft 1.20.1
-2. Install [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-3. Download the latest PistonProPlus jar from [Releases](https://github.com/yourname/PistonProPlus/releases)
-4. Place it in your `mods` folder
-5. Launch Minecraft!
-
-### For Server Admins
-1. Install [Fabric Loader](https://fabricmc.net/use/) on your server
-2. Install [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-3. Place PistonProPlus jar in the server's `mods` folder
-4. Configure permissions as needed:
-   - Level 2: `/pistonproplus reload`
-   - Level 4: All other configuration commands
-
-## 🛠️ Building from Source
-
-### Prerequisites
-- Java 17 or higher
-- Gradle
-
-### Build Steps
-```bash
-# Clone the repository
-git clone https://github.com/yourname/PistonProPlus.git
-cd PistonProPlus
-
-# Build the mod
-./gradlew build
-
-# The built jar will be in build/libs/
-```
-
-## 🚀 Use Cases
-
-### Creative Building
-- Move large structures easily
-- Create complex piston machines without space constraints
-- Experiment with command block contraptions
-
-### Technical Minecraft
-- Build more efficient flying machines
-- Create advanced redstone contraptions
-- Push previously immovable blocks for technical builds
-
-### Adventure Maps
-- Create custom mechanics with movable command blocks
-- Design puzzles with pushable barriers
-- Implement dynamic map elements
-
 ## ⚠️ Warnings & Limitations
 
 ### Important Notes
 1. **MOVING_PISTON (block 36) can NEVER be pushed** - This is a vanilla safety mechanism
-2. **Command blocks may lose NBT data when pushed** - Back up important command blocks
-3. **Pushing all blocks may cause instability** - Use with caution in survival worlds
-4. **Very high push limits may cause lag** - Test performance on your server
+2. **Pushing all blocks may cause instability** - Use with caution in survival worlds
+3. **Very high push limits may cause lag** - Test performance on your server
 
 ### Best Practices
 1. Start with small limits and increase gradually
@@ -197,24 +132,9 @@ cd PistonProPlus
 3. Backup worlds before enabling experimental features
 4. Monitor server performance with high push limits
 
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. **Report Bugs** - Open an issue with detailed information
-2. **Suggest Features** - Share your ideas for improvements
-3. **Submit Translations** - Add support for more languages
-4. **Code Contributions** - Fork and submit pull requests
-
 ## 📄 License
 
 This project is licensed under the GPLv3 License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Credits
-
-- **Mojang Studios** - For creating Minecraft
-- **Fabric Team** - For the amazing modding framework
-- **All Contributors** - For making this mod better
 
 ## 🔗 Links
 
