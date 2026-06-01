@@ -17,9 +17,6 @@
 	"entrypoints": {
 		"main": [
 			"com.juzizhen.pistonproplus.PistonProPlus"
-		],
-		"fabric-datagen": [
-			"com.juzizhen.pistonproplus.PistonProPlusDataGenerator"
 		]
 	},
 	"mixins": [
