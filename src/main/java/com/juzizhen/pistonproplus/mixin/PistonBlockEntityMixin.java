@@ -49,7 +49,7 @@ public abstract class PistonBlockEntityMixin extends BlockEntity {
 
         BlockEntity targetBe = world.getBlockEntity(finalPos);
         if (targetBe != null && !(targetBe instanceof PistonBlockEntity)) {
-            targetBe.readNbt(nbtToRestore);
+            targetBe.read(nbtToRestore, world.getRegistryManager());
             targetBe.markDirty();
 
             BlockState currentState = world.getBlockState(finalPos);

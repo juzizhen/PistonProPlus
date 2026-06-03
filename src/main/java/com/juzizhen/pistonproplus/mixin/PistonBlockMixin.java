@@ -69,7 +69,7 @@ public class PistonBlockMixin {
         for (BlockPos srcPos : movedBlocks) {
             BlockEntity be = world.getBlockEntity(srcPos);
             if (be != null) {
-                NbtCompound nbt = be.createNbtWithIdentifyingData();
+                NbtCompound nbt = be.createNbtWithIdentifyingData(world.getRegistryManager());
                 PistonNbtStorage.ORIGINAL_POS_NBT_MAP.put(srcPos, nbt);
 
                 Clearable.clear(be);
