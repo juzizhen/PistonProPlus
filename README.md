@@ -1,6 +1,6 @@
 # PistonProPlus
 
-This is a Minecraft 1.20.1 Fabric Mod
+This is a Minecraft Fabric Mod
 
 <h3>Make Piston Great Again !</h3>
 
