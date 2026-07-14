@@ -42,7 +42,6 @@ public abstract class PistonBlockEntityMixin extends BlockEntity {
         BlockPos originalPos = finalPos.offset(moveDir.getOpposite());
 
         NbtCompound nbtToRestore = PistonNbtStorage.ORIGINAL_POS_NBT_MAP.remove(originalPos);
-        System.out.println("nbtToRestore" + nbtToRestore);
         if (nbtToRestore == null) {
             return;
         }

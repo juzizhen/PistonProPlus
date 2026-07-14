@@ -16,15 +16,13 @@ public class PistonProPlus implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("✅ PistonProPlus Mod 初始化中...");
+        LOGGER.info("PistonProPlus initializing...");
 
         // 加载配置
         ModConfig.loadConfig();
 
         // 注册服务器启动/停止事件
-        ServerLifecycleEvents.SERVER_STARTING.register(server -> {
-            LOGGER.info("✅ PistonProPlus Mod 已加载");
-        });
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> LOGGER.info("PistonProPlus loaded"));
 
         // 注册指令
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {

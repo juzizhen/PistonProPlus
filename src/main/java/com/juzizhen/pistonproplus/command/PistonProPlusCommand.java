@@ -8,6 +8,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
@@ -19,39 +20,31 @@ public class PistonProPlusCommand {
                 .then(CommandManager.literal("help")
                         .executes(PistonProPlusCommand::executeHelp))
 
-                .then(CommandManager.literal("push")
+                .then(CommandManager.literal("pushlimit")
                         .then(CommandManager.literal("set")
                                 .requires(source -> source.hasPermissionLevel(4))
-                                .then(CommandManager.argument("limit", IntegerArgumentType.integer(1, 4096))
+                                .then(CommandManager.argument("limit", IntegerArgumentType.integer(-1, 4096))
                                         .executes(context -> executeSetLimit(
                                                 context,
                                                 IntegerArgumentType.getInteger(context, "limit")
                                         ))))
 
                         .then(CommandManager.literal("get")
-                                .executes(PistonProPlusCommand::executeGetLimit))
+                                .executes(PistonProPlusCommand::executeGetLimit)))
 
-                        .then(CommandManager.literal("infinite")
-                                .requires(source -> source.hasPermissionLevel(4))
-                                .then(CommandManager.argument("enabled", BoolArgumentType.bool())
-                                        .executes(context -> executeSetInfinite(
-                                                context,
-                                                BoolArgumentType.getBool(context, "enabled")
-                                        )))))
-
-                // 新增的命令方块控制指令
-                .then(CommandManager.literal("block")
+                .then(CommandManager.literal("typelimit")
                         .then(CommandManager.literal("commandblock")
                                 .requires(source -> source.hasPermissionLevel(4))
+                                .executes(PistonProPlusCommand::executeGetCommandBlock)
                                 .then(CommandManager.argument("enabled", BoolArgumentType.bool())
                                         .executes(context -> executeSetCommandBlock(
                                                 context,
                                                 BoolArgumentType.getBool(context, "enabled")
                                         ))))
 
-                        // 新增的所有方块控制指令
                         .then(CommandManager.literal("all")
                                 .requires(source -> source.hasPermissionLevel(4))
+                                .executes(PistonProPlusCommand::executeGetAllBlocks)
                                 .then(CommandManager.argument("enabled", BoolArgumentType.bool())
                                         .executes(context -> executeSetAllBlocks(
                                                 context,
@@ -75,34 +68,27 @@ public class PistonProPlusCommand {
 
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_LINE,
-                Text.literal("/pistonproplus push set <1-4096>").formatted(Formatting.YELLOW),
+                Text.literal("/pistonproplus pushlimit set <limit>").formatted(Formatting.YELLOW),
                 Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
                         .append(Text.translatable(I18n.COMMANDS_SET_LIMIT_DESCRIPTION).formatted(Formatting.GRAY))
         ));
 
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_LINE,
-                Text.literal("/pistonproplus push get").formatted(Formatting.YELLOW),
+                Text.literal("/pistonproplus pushlimit get").formatted(Formatting.YELLOW),
                 Text.translatable(I18n.COMMANDS_GET_LIMIT_DESCRIPTION).formatted(Formatting.GRAY)
         ));
 
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_LINE,
-                Text.literal("/pistonproplus push infinite <true/false>").formatted(Formatting.YELLOW),
-                Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
-                        .append(Text.translatable(I18n.COMMANDS_SET_INFINITE_DESCRIPTION).formatted(Formatting.GRAY))
-        ));
-
-        source.sendMessage(ChatFormat.createMessage(
-                I18n.COMMAND_HELP_LINE,
-                Text.literal("/pistonproplus block commandblock <true/false>").formatted(Formatting.YELLOW),
+                Text.literal("/pistonproplus typelimit commandblock [true/false]").formatted(Formatting.YELLOW),
                 Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
                         .append(Text.translatable(I18n.COMMANDS_SET_COMMANDBLOCK_DESCRIPTION).formatted(Formatting.GRAY))
         ));
 
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_LINE,
-                Text.literal("/pistonproplus block all <true/false>").formatted(Formatting.YELLOW),
+                Text.literal("/pistonproplus typelimit all [true/false]").formatted(Formatting.YELLOW),
                 Text.translatable(I18n.COMMANDS_REQUIRES_OP).formatted(Formatting.RED)
                         .append(Text.translatable(I18n.COMMANDS_SET_ALLBLOCKS_DESCRIPTION).formatted(Formatting.GRAY))
         ));
@@ -114,17 +100,13 @@ public class PistonProPlusCommand {
         ));
 
         // 显示版本信息
+        String modVersion = FabricLoader.getInstance().getModContainer("pistonproplus")
+                .map(container -> container.getMetadata().getVersion().getFriendlyString())
+                .orElse("unknown");
         source.sendMessage(ChatFormat.createMessage(
                 I18n.COMMAND_HELP_VERSION,
-                Text.literal("1.1.1").formatted(Formatting.AQUA)
+                Text.literal(modVersion).formatted(Formatting.AQUA)
         ));
-
-        // 显示功能特性
-        source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_MODIFY_LIMIT)));
-        source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_HOT_RELOAD)));
-        source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_COMMANDS)));
-        source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_COLORED_MESSAGES)));
-        source.sendMessage(ChatFormat.createInfoMessage(Text.translatable(I18n.FEATURE_BLOCK_CONTROL)));
 
         return Command.SINGLE_SUCCESS;
     }
@@ -132,7 +114,11 @@ public class PistonProPlusCommand {
     private static int executeSetLimit(CommandContext<ServerCommandSource> context, int limit) {
         ModConfig.setMaxPushLimit(limit);
 
-        if (limit == 12) {
+        if (limit < 0) {
+            context.getSource().sendMessage(
+                    ChatFormat.createSuccessMessage(I18n.COMMAND_SET_INFINITE)
+            );
+        } else if (limit == 12) {
             context.getSource().sendMessage(
                     ChatFormat.createSuccessMessage(
                             I18n.COMMAND_SET_SAME_AS_VANILLA,
@@ -170,7 +156,7 @@ public class PistonProPlusCommand {
             context.getSource().sendMessage(
                     ChatFormat.createInfoMessage(
                             I18n.COMMAND_GET_INFINITE,
-                            Text.literal(String.valueOf(configLimit)).formatted(Formatting.GRAY)
+                            Text.translatable(I18n.MODE_INFINITE).formatted(Formatting.GOLD)
                     )
             );
         } else if (effectiveLimit == 12) {
@@ -196,19 +182,27 @@ public class PistonProPlusCommand {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int executeSetInfinite(CommandContext<ServerCommandSource> context, boolean enabled) {
-        ModConfig.setAllowInfinitePush(enabled);
+    private static int executeGetCommandBlock(CommandContext<ServerCommandSource> context) {
+        boolean enabled = ModConfig.isAllowPushCommandBlock();
+        context.getSource().sendMessage(
+                ChatFormat.createInfoMessage(
+                        I18n.TYPELIMIT_STATUS_COMMANDBLOCK,
+                        Text.translatable(enabled ? I18n.OPTIONS_ON : I18n.OPTIONS_OFF)
+                                .formatted(enabled ? Formatting.GREEN : Formatting.RED)
+                )
+        );
+        return Command.SINGLE_SUCCESS;
+    }
 
-        if (enabled) {
-            context.getSource().sendMessage(
-                    ChatFormat.createSuccessMessage(I18n.COMMAND_INFINITE_ENABLED)
-            );
-        } else {
-            context.getSource().sendMessage(
-                    ChatFormat.createSuccessMessage(I18n.COMMAND_INFINITE_DISABLED)
-            );
-        }
-
+    private static int executeGetAllBlocks(CommandContext<ServerCommandSource> context) {
+        boolean enabled = ModConfig.isAllowPushAllBlocks();
+        context.getSource().sendMessage(
+                ChatFormat.createInfoMessage(
+                        I18n.TYPELIMIT_STATUS_ALLBLOCKS,
+                        Text.translatable(enabled ? I18n.OPTIONS_ON : I18n.OPTIONS_OFF)
+                                .formatted(enabled ? Formatting.GREEN : Formatting.RED)
+                )
+        );
         return Command.SINGLE_SUCCESS;
     }
 

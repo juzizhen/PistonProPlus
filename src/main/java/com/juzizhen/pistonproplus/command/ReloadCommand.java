@@ -61,7 +61,8 @@ public class ReloadCommand {
                     Text.translatable(I18n.OPTIONS_ON).getString() :
                     Text.translatable(I18n.OPTIONS_OFF).getString();
 
-            message.append("Command Block: ").append(oldStatus).append(" → ").append(newStatus).append("\n");
+            message.append(Text.translatable(I18n.COMMAND_RELOAD_LABEL_COMMANDBLOCK).getString())
+                    .append(": ").append(oldStatus).append(" -> ").append(newStatus).append("\n");
         }
 
         // 检查所有方块推动是否改变
@@ -73,20 +74,21 @@ public class ReloadCommand {
                     Text.translatable(I18n.OPTIONS_ON).getString() :
                     Text.translatable(I18n.OPTIONS_OFF).getString();
 
-            message.append("All Blocks: ").append(oldStatus).append(" → ").append(newStatus).append("\n");
+            message.append(Text.translatable(I18n.COMMAND_RELOAD_LABEL_ALLBLOCKS).getString())
+                    .append(": ").append(oldStatus).append(" -> ").append(newStatus).append("\n");
         }
 
         // 检查推动上限是否改变
         if (oldLimit != newLimit) {
             String oldDisplay = oldInfinite ?
-                    "∞" : String.valueOf(oldLimit);
+                    Text.translatable(I18n.INFINITY_SYMBOL).getString() : String.valueOf(oldLimit);
             String newDisplay = newInfinite ?
-                    "∞" : String.valueOf(newLimit);
+                    Text.translatable(I18n.INFINITY_SYMBOL).getString() : String.valueOf(newLimit);
 
             message.append(Text.translatable(I18n.COMMAND_RELOAD_LIMIT_CHANGED, oldDisplay, newDisplay).getString());
         } else {
             String display = newInfinite ?
-                    "∞" : String.valueOf(newLimit);
+                    Text.translatable(I18n.INFINITY_SYMBOL).getString() : String.valueOf(newLimit);
 
             message.append(Text.translatable(I18n.COMMAND_RELOAD_LIMIT_UNCHANGED, display).getString());
         }

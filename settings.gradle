@@ -9,4 +9,5 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'PistonProPlus'
+// Should match your modid
+rootProject.name = 'pistonproplus'
