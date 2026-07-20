@@ -5,9 +5,8 @@
 [![License: GPLv3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/license/gpl-3-0)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-green.svg)](https://www.minecraft.net/)
 [![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-blue.svg)](https://fabricmc.net/)
-[![Java](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://www.oracle.com/java/)
 
-A server-side Fabric mod for Minecraft 1.20.1 that enhances piston behavior with configurable push limits, advanced block pushing control, and NBT data preservation.
+A server-side Fabric mod for Minecraft that enhances piston behavior with configurable push limits, advanced block pushing control, and NBT data preservation.
 
 ## Features
 
@@ -22,25 +21,25 @@ A server-side Fabric mod for Minecraft 1.20.1 that enhances piston behavior with
 
 ### Push Limit
 
-| Command | Permission | Description |
-|---|---|---|
+| Command                                | Permission   | Description                                                   |
+|----------------------------------------|--------------|---------------------------------------------------------------|
 | `/pistonproplus pushlimit set <limit>` | OP (level 4) | Set piston push limit (1-4096). Use **-1** for infinite mode. |
-| `/pistonproplus pushlimit get` | None | Display the current push limit and mode. |
+| `/pistonproplus pushlimit get`         | None         | Display the current push limit and mode.                      |
 
 ### Type Limit
 
-| Command | Permission | Description |
-|---|---|---|
-| `/pistonproplus typelimit commandblock [true/false]` | OP (level 4) | Toggle or query command block pushing. |
-| `/pistonproplus typelimit all [true/false]` | OP (level 4) | Toggle or query all-blocks pushing (except MOVING_PISTON and command blocks). |
+| Command                                              | Permission   | Description                                                                   |
+|------------------------------------------------------|--------------|-------------------------------------------------------------------------------|
+| `/pistonproplus typelimit commandblock [true/false]` | OP (level 4) | Toggle or query command block pushing.                                        |
+| `/pistonproplus typelimit all [true/false]`          | OP (level 4) | Toggle or query all-blocks pushing (except MOVING_PISTON and command blocks). |
 
 Omitting the boolean argument displays the current status (ON/OFF).
 
 ### Utility
 
-| Command | Permission | Description |
-|---|---|---|
-| `/pistonproplus help` | None | Show the help menu. |
+| Command                 | Permission   | Description                         |
+|-------------------------|--------------|-------------------------------------|
+| `/pistonproplus help`   | None         | Show the help menu.                 |
 | `/pistonproplus reload` | OP (level 2) | Hot-reload configuration from disk. |
 
 ## Configuration
@@ -56,12 +55,12 @@ Settings are stored in `config/pistonproplus.json` and can be edited directly or
 }
 ```
 
-| Key | Type | Default | Description |
-|---|---|---|---|
-| `maxPushLimit` | int | 12 | Maximum blocks a piston can push (1-4096) |
-| `allowInfinitePush` | boolean | false | When true, push limit becomes 4096 |
-| `allowPushCommandBlock` | boolean | false | Allow pistons to push command blocks (NBT preserved) |
-| `allowPushAllBlocks` | boolean | false | Allow pistons to push nearly all blocks (except MOVING_PISTON) |
+| Key                     | Type    | Default | Description                                                    |
+|-------------------------|---------|---------|----------------------------------------------------------------|
+| `maxPushLimit`          | int     | 12      | Maximum blocks a piston can push (1-4096)                      |
+| `allowInfinitePush`     | boolean | false   | When true, push limit becomes 4096                             |
+| `allowPushCommandBlock` | boolean | false   | Allow pistons to push command blocks (NBT preserved)           |
+| `allowPushAllBlocks`    | boolean | false   | Allow pistons to push nearly all blocks (except MOVING_PISTON) |
 
 ## Warnings
 
@@ -69,21 +68,6 @@ Settings are stored in `config/pistonproplus.json` and can be edited directly or
 - **Command blocks may lose NBT data** in edge cases; the mod preserves NBT through capture/restore, but complex setups should be tested.
 - **Pushing all blocks may cause unexpected behavior.** Attached blocks (redstone dust, torches, etc.) on slime blocks can behave unexpectedly during large pushes.
 - **Very high push limits may cause server lag.** Test incrementally before deploying on production servers.
-
-## Requirements
-
-- Minecraft 1.20.1
-- Fabric Loader >= 0.18.4
-- Fabric API
-- Java 17+
-
-## Building
-
-```bash
-./gradlew build
-```
-
-The output JAR will be placed in `build/libs/`.
 
 ## License
 
