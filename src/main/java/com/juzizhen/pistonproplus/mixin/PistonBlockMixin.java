@@ -1,6 +1,7 @@
 package com.juzizhen.pistonproplus.mixin;
 
 import com.juzizhen.pistonproplus.config.ModConfig;
+import com.juzizhen.pistonproplus.util.PistonMoveContext;
 import com.juzizhen.pistonproplus.util.PistonNbtStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -59,6 +60,8 @@ public class PistonBlockMixin {
     private void captureNBT(World world, BlockPos pos, Direction dir, boolean extending, CallbackInfoReturnable<Boolean> cir) {
         if (world.isClient) return;
 
+        PistonMoveContext.begin();
+
         PistonHandler handler = new PistonHandler(world, pos, dir, extending);
 
         if (!handler.calculatePush()) {
@@ -67,6 +70,8 @@ public class PistonBlockMixin {
 
         List<BlockPos> movedBlocks = handler.getMovedBlocks();
         for (BlockPos srcPos : movedBlocks) {
+            PistonMoveContext.add(srcPos.toImmutable());
+
             BlockEntity be = world.getBlockEntity(srcPos);
             if (be != null) {
                 NbtCompound nbt = be.createNbtWithIdentifyingData(world.getRegistryManager());
@@ -76,5 +81,11 @@ public class PistonBlockMixin {
                 world.removeBlockEntity(srcPos);
             }
         }
+    }
+
+    @Inject(method = "move", at = @At("RETURN"))
+    private void pistonproplus$cleanupMoveContext(World world, BlockPos pos, Direction dir, boolean extending, CallbackInfoReturnable<Boolean> cir) {
+        if (world.isClient) return;
+        PistonMoveContext.end();
     }
 }

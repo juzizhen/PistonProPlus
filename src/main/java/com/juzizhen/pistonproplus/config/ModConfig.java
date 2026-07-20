@@ -38,7 +38,7 @@ public class ModConfig {
                     saveConfig();
                 }
             } catch (IOException e) {
-                PistonProPlus.LOGGER.error("❌ 无法加载配置文件", e);
+                PistonProPlus.LOGGER.error("Failed to load config file", e);
                 INSTANCE = new ModConfig();
             }
         } else {
@@ -51,7 +51,7 @@ public class ModConfig {
         try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
             GSON.toJson(INSTANCE, writer);
         } catch (IOException e) {
-            PistonProPlus.LOGGER.error("❌ 无法保存配置文件", e);
+            PistonProPlus.LOGGER.error("Failed to save config file", e);
         }
     }
 
@@ -67,10 +67,16 @@ public class ModConfig {
     }
 
     public static void setMaxPushLimit(int limit) {
-        if (limit <= 0) {
-            limit = 12;
+        if (limit < 0) {
+            INSTANCE.allowInfinitePush = true;
+            INSTANCE.maxPushLimit = Math.abs(limit);
+        } else {
+            INSTANCE.allowInfinitePush = false;
+            if (limit <= 0) {
+                limit = 12;
+            }
+            INSTANCE.maxPushLimit = limit;
         }
-        INSTANCE.maxPushLimit = limit;
         saveConfig();
     }
 

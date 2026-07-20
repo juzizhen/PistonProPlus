@@ -1,8 +1,10 @@
 package com.juzizhen.pistonproplus.util;
 
+import com.juzizhen.pistonproplus.PistonProPlus;
+
 public class I18n {
     // 翻译键前缀
-    public static final String MOD_ID = "pistonproplus";
+    public static final String MOD_ID = PistonProPlus.MOD_ID;
 
     // 通用消息
     public static final String PREFIX = "message." + MOD_ID + ".prefix";
@@ -27,25 +29,30 @@ public class I18n {
     public static final String COMMAND_GET_INFINITE = "command." + MOD_ID + ".get.infinite";
     public static final String COMMAND_GET_CONFIG_VALUE = "command." + MOD_ID + ".get.config_value";
 
-    // 命令无限模式
-    public static final String COMMAND_INFINITE_ENABLED = "command." + MOD_ID + ".infinite.enabled";
-    public static final String COMMAND_INFINITE_DISABLED = "command." + MOD_ID + ".infinite.disabled";
+    // pushlimit set infinite feedback
+    public static final String COMMAND_SET_INFINITE = "command." + MOD_ID + ".pushlimit.set.infinite";
 
     // 命令重载
     public static final String COMMAND_RELOAD_SUCCESS = "command." + MOD_ID + ".reload.success";
     public static final String COMMAND_RELOAD_INFINITE_CHANGED = "command." + MOD_ID + ".reload.infinite_changed";
     public static final String COMMAND_RELOAD_LIMIT_CHANGED = "command." + MOD_ID + ".reload.limit_changed";
     public static final String COMMAND_RELOAD_LIMIT_UNCHANGED = "command." + MOD_ID + ".reload.limit_unchanged";
+    public static final String COMMAND_RELOAD_LABEL_COMMANDBLOCK = "command." + MOD_ID + ".reload.label.commandblock";
+    public static final String COMMAND_RELOAD_LABEL_ALLBLOCKS = "command." + MOD_ID + ".reload.label.allblocks";
 
-    // 新增的命令方块控制
+    // 命令方块控制
     public static final String COMMAND_BLOCK_ENABLED = "command." + MOD_ID + ".block.commandblock.enabled";
     public static final String COMMAND_BLOCK_DISABLED = "command." + MOD_ID + ".block.commandblock.disabled";
     public static final String COMMAND_BLOCK_WARNING = "command." + MOD_ID + ".block.commandblock.warning";
 
-    // 新增的所有方块控制
+    // 所有方块控制
     public static final String ALL_BLOCKS_ENABLED = "command." + MOD_ID + ".block.all.enabled";
     public static final String ALL_BLOCKS_DISABLED = "command." + MOD_ID + ".block.all.disabled";
     public static final String ALL_BLOCKS_WARNING = "command." + MOD_ID + ".block.all.warning";
+
+    // typelimit 状态查询
+    public static final String TYPELIMIT_STATUS_COMMANDBLOCK = "command." + MOD_ID + ".typelimit.status.commandblock";
+    public static final String TYPELIMIT_STATUS_ALLBLOCKS = "command." + MOD_ID + ".typelimit.status.allblocks";
 
     // 杂项
     public static final String VANILLA_DEFAULT = "misc." + MOD_ID + ".vanilla_default";
@@ -56,24 +63,19 @@ public class I18n {
     public static final String COMMANDS_HELP_DESCRIPTION = "commands.help.description";
     public static final String COMMANDS_SET_LIMIT_DESCRIPTION = "commands.set_limit.description";
     public static final String COMMANDS_GET_LIMIT_DESCRIPTION = "commands.get_limit.description";
-    public static final String COMMANDS_SET_INFINITE_DESCRIPTION = "commands.set_infinite.description";
     public static final String COMMANDS_RELOAD_DESCRIPTION = "commands.reload.description";
     public static final String COMMANDS_REQUIRES_OP = "commands.requires_op";
     public static final String COMMANDS_SET_COMMANDBLOCK_DESCRIPTION = "commands.set_commandblock.description";
+    public static final String COMMANDS_GET_COMMANDBLOCK_DESCRIPTION = "commands.get_commandblock.description";
     public static final String COMMANDS_SET_ALLBLOCKS_DESCRIPTION = "commands.set_allblocks.description";
+    public static final String COMMANDS_GET_ALLBLOCKS_DESCRIPTION = "commands.get_allblocks.description";
 
     // 模式名称
     public static final String MODE_ENHANCED = "misc.enhanced_mode";
     public static final String MODE_RESTRICTED = "misc.restricted_mode";
+    public static final String MODE_INFINITE = "misc.infinite_mode";
 
     // 选项
     public static final String OPTIONS_ON = "options.on";
     public static final String OPTIONS_OFF = "options.off";
-
-    // 功能特性（用于帮助文本）
-    public static final String FEATURE_MODIFY_LIMIT = "feature.modify_limit";
-    public static final String FEATURE_HOT_RELOAD = "feature.hot_reload";
-    public static final String FEATURE_COMMANDS = "feature.commands";
-    public static final String FEATURE_COLORED_MESSAGES = "feature.colored_messages";
-    public static final String FEATURE_BLOCK_CONTROL = "feature.block_control";
 }
